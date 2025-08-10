@@ -1,663 +1,566 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DHX.O2 - Marketplace Produk Digital</title>
-    
-    <!-- Memuat Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Memuat Google Fonts (BioRhyme) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Menerapkan font default dan tema */
-        body {
-            font-family: 'BioRhyme', serif;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DHX.O2 - Marketplace Produk Digital</title>
 
-        /* Light Mode Styles */
-        body.light-mode {
-            background-color: #FFFFFF;
-            color: #1A1C22;
-        }
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-image: linear-gradient(to right, #1A1C22, #232526, #414345);
-            color: #FAF9F6;
-        }
-        
-        /* Menambahkan margin atas saat scroll ke ID tertentu agar tidak tertutup header */
-        section[id] {
-            scroll-margin-top: 90px;
-        }
+  <!-- Google Fonts: BioRhyme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700&display=swap" rel="stylesheet">
 
-        /* Styling untuk kartu produk "gelembung" */
-        .product-card-content {
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparan untuk dark mode */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
+  <style>
+    body{
+      font-family:'BioRhyme',serif;
+      transition:background-color .5s ease,color .5s ease;
+    }
+    /* Light / Dark */
+    body.light-mode{background:#FFFFFF;color:#1A1C22;}
+    body.dark-mode{background-image:linear-gradient(to right,#1A1C22,#232526,#414345);color:#FAF9F6;}
 
-        .light-mode .product-card-content {
-             background-color: rgba(240, 240, 240, 0.5); /* Semi-transparan untuk light mode */
-             border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
+    section[id]{scroll-margin-top:90px;}
 
-        .light-mode .category-item, .light-mode .contact-form-container {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        
-        .dark-mode .category-item, .dark-mode .contact-form-container {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+    /* Kartu "gelembung" */
+    .product-card-content{
+      background-color:rgba(255,255,255,0.1);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border-top:1px solid rgba(255,255,255,0.2);
+    }
+    .light-mode .product-card-content{
+      background-color:rgba(240,240,240,0.5);
+      border-top:1px solid rgba(0,0,0,0.1);
+    }
+    .light-mode .category-item,.light-mode .contact-form-container{background-color:rgba(0,0,0,0.05);}
+    .dark-mode .category-item,.dark-mode .contact-form-container{background-color:rgba(255,255,255,0.1);}
 
-        .dark-mode .header-bg {
-            background-color: rgba(26, 28, 34, 0.7); /* Latar belakang header di dark mode */
-        }
-
-        .light-mode .header-bg {
-             background-color: rgba(255, 255, 255, 0.7); /* Latar belakang header di light mode */
-        }
-    </style>
+    .dark-mode .header-bg{background-color:rgba(26,28,34,0.7);}
+    .light-mode .header-bg{background-color:rgba(255,255,255,0.7);}
+  </style>
 </head>
-<body class="light-mode">
+<body class="light-mode antialiased">
 
-    <!-- Bagian Header dan Navigasi -->
-    <header class="header-bg backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#beranda" class="text-3xl font-bold">DHX.O2</a>
-            
-            <!-- Menu Kanan -->
-            <div class="flex items-center space-x-4">
-                <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
-                
-                <!-- Tombol Pengalih Tema -->
-                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    <!-- Ikon Bulan (untuk light mode) -->
-                    <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    <!-- Ikon Matahari (untuk dark mode) -->
-                    <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                </button>
-				<!-- Menu Kanan -->
-<div class="items-center space-x-4 hidden md:flex">
-  <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
-  <!-- Tombol Pengalih Tema -->
-  <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-    <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-    <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-  </button>
-</div>
+  <!-- Header / Navigation -->
+  <header class="header-bg backdrop-blur-sm sticky top-0 z-50 shadow-sm border-b border-black/5 dark:border-white/10">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="#beranda" class="text-2xl md:text-3xl font-bold">DHX.O2</a>
 
-<!-- Tombol Hamburger (HP) -->
-<button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-  <!-- Icon garis tiga -->
-  <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
-  </svg>
-  <span class="sr-only">Buka menu</span>
-</button>
+      <!-- Menu kanan (Desktop) -->
+      <div class="items-center space-x-4 hidden md:flex">
+        <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
 
-            </div>
-        </div>
-    </header>
-	
-<!-- Panel Menu Mobile -->
-<div id="mobile-menu" class="fixed inset-0 z-50 hidden">
-  <!-- Overlay -->
-  <div id="mobile-overlay" class="absolute inset-0 bg-black/50"></div>
+        <!-- Tombol Pengalih Tema (Desktop) -->
+        <button id="theme-toggle-desktop" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <!-- Bulan -->
+          <svg id="theme-toggle-dark-icon-desktop" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          <!-- Matahari -->
+          <svg id="theme-toggle-light-icon-desktop" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
 
-  <!-- Drawer -->
-  <nav class="absolute right-0 top-0 h-full w-72 max-w-[85%] bg-white dark:bg-[#1E1F24] shadow-xl p-5 flex flex-col gap-3 translate-x-full transition-transform duration-300 will-change-transform">
-    <div class="flex items-center justify-between mb-4">
-      <span class="text-lg font-bold">Menu</span>
-      <button id="mobile-close" class="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10" aria-label="Tutup menu">
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
+      <!-- Tombol tema + Hamburger (Mobile) -->
+      <div class="md:hidden flex items-center gap-3">
+        <!-- Tema (Mobile) -->
+        <button id="theme-toggle-mobile" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <svg id="theme-toggle-dark-icon-mobile" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          <svg id="theme-toggle-light-icon-mobile" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1z"/></svg>
+        </button>
+        <!-- Hamburger -->
+        <button id="mobile-menu-button" class="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-white/10">
+          <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+          <span class="sr-only">Buka menu</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu (drop-down sederhana seperti contohmu) -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+      <a href="#template" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Template</a>
+      <a href="#software" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Software</a>
+      <a href="#ebook" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">E-Book</a>
+      <a href="#musik" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Musik & Audio</a>
+      <a href="#foto_video" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Foto & Video</a>
+      <a href="#lainnya" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Lainnya</a>
+      <a href="#kontak" class="block py-2 bg-cyan-500 text-white text-center font-bold rounded-lg">Hubungi Kami</a>
     </div>
+  </header>
 
-    <!-- Pilihan kategori -->
-    <a href="#template" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Template</a>
-    <a href="#software" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Software</a>
-    <a href="#ebook" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">E-Book</a>
-    <a href="#musik" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Musik & Audio</a>
-    <a href="#foto_video" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Foto & Video</a>
-    <a href="#lainnya" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Lainnya</a>
+  <main class="container mx-auto px-6 py-12">
+    <!-- Deskripsi Website -->
+    <section id="beranda" class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di DHX.O2</h1>
+      <p class="max-w-3xl mx-auto text-lg">
+        Platform terpercaya Anda untuk menemukan dan mendapatkan berbagai produk digital berkualitas tinggi. Mulai dari e-book, musik, template, hingga perangkat lunak—semuanya tersedia untuk mendukung kreativitas dan produktivitas Anda.
+      </p>
+    </section>
 
-    <hr class="my-3 border-gray-200 dark:border-white/10">
-    <a href="#kontak" class="py-2 px-3 rounded-md bg-gray-900 text-white text-center font-semibold hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-100">Hubungi Kami</a>
-  </nav>
-</div>
+    <!-- Kategori Produk -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-center mb-8">Kategori Produk Digital</h2>
+      <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-4 text-center">
+        <a href="#template" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Template</span>
+        </a>
 
-    <main class="container mx-auto px-6 py-12">
-        <!-- Deskripsi Website -->
-        <section id="beranda" class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di DHX.O2</h1>
-            <p class="max-w-3xl mx-auto text-lg">
-                Platform terpercaya Anda untuk menemukan dan memDapatkan berbagai macam produk digital berkualitas tinggi. Mulai dari e-book, musik, template, hingga perangkat lunak, semua tersedia di sini untuk mendukung kreativitas dan produktivitas Anda.
-            </p>
-        </section>
+        <a href="#software" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Software</span>
+        </a>
 
-        <!-- Bagian Kategori Produk -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8">Kategori Produk Digital</h2>
-            <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-4 text-center">
-                <!-- Kategori yang sudah ada + yang baru -->
-				<a href="#template" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg><span class="text-xs font-semibold">Template</span></a>
-                <a href="#software" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg><span class="text-xs font-semibold">Software</span></a>
-				<a href="#ebook" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-5.747-5.747H17.747M5.253 12h11.494M4 6h16M4 18h16" /></svg><span class="text-xs font-semibold">E-book</span></a>
-                <a href="#musik" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l10-3v13l-10 3z" /></svg><span class="text-xs font-semibold">Musik</span></a>
-                <a href="#foto_video" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg><span class="text-xs font-semibold">Video</span></a>
-                <a href="#grafis" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536l12.232-12.232z" /></svg><span class="text-xs font-semibold">Grafis</span></a>
-                <a href="#font" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg><span class="text-xs font-semibold">Font</span></a>
-                <a href="#mobile" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg><span class="text-xs font-semibold">Aplikasi</span></a>
-                <a href="#undangan" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg><span class="text-xs font-semibold">Undangan</span></a>
-                <a href="#dokumen" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg><span class="text-xs font-semibold">Dokumen</span></a>
-                <a href="#artikel" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3h2m-4 4h4m-4 4h4m-4 4h4" /></svg><span class="text-xs font-semibold">Artikel</span></a>
-                <a href="#poster" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13V7m0 13h6m-6 0l6-3m-6 3V7m6 10v-4a2 2 0 00-2-2h-2.5" /></svg><span class="text-xs font-semibold">Poster</span></a>
-                <a href="#powerpoint" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-4m-2 4h.01M12 14h.01M10 10h.01M14 10h.01M16 14h.01M12 6V4m0 2a2 2 0 100 4h-4a2 2 0 100 4h4a2 2 0 100-4z" /></svg><span class="text-xs font-semibold">PowerPoint</span></a>
-                <a href="#excel" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg><span class="text-xs font-semibold">Excel</span></a>
-				<a href="#foto" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l2-2h3l2-2h4l2 2h3l2 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span class="text-xs font-semibold">Foto</span></a>
-				<a href="#lainnya" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg"class="h-8 w-8 mb-2"fill="none"viewBox="0 0 24 24"stroke="currentColor"><circle cx="6" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-xs font-semibold">Lainnya</span></a>
+        <a href="#ebook" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-5.747-5.747H17.747M5.253 12h11.494M4 6h16M4 18h16"/>
+          </svg>
+          <span class="text-xs font-semibold">E-book</span>
+        </a>
 
-			</div>
-        </section>
+        <a href="#musik" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l10-3v13l-10 3z"/>
+          </svg>
+          <span class="text-xs font-semibold">Musik</span>
+        </a>
 
-        <!-- Bagian Grid Produk per Kategori -->
-        <div class="space-y-16">
-		
-		            <!-- Design Template Section -->
-<section id="template">
-    <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Template</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        
-        <!-- Produk Template 1 -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+        <a href="#foto_video" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Video</span>
+        </a>
+
+        <a href="#grafis" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536l12.232-12.232z"/>
+          </svg>
+          <span class="text-xs font-semibold">Grafis</span>
+        </a>
+
+        <a href="#font" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+          </svg>
+          <span class="text-xs font-semibold">Font</span>
+        </a>
+
+        <a href="#mobile" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Aplikasi</span>
+        </a>
+
+        <a href="#undangan" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Undangan</span>
+        </a>
+
+        <a href="#dokumen" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-xs font-semibold">Dokumen</span>
+        </a>
+
+        <a href="#artikel" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3h2m-4 4h4m-4 4h4m-4 4h4"/>
+          </svg>
+          <span class="text-xs font-semibold">Artikel</span>
+        </a>
+
+        <a href="#poster" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13V7m0 13h6m-6 0l6-3m-6 3V7m6 10v-4a2 2 0 00-2-2h-2.5"/>
+          </svg>
+          <span class="text-xs font-semibold">Poster</span>
+        </a>
+
+        <a href="#powerpoint" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-4m-2 4h.01M12 14h.01M10 10h.01M14 10h.01M16 14h.01M12 6V4m0 2a2 2 0 100 4h-4a2 2 0 100 4h4a2 2 0 100-4z"/>
+          </svg>
+          <span class="text-xs font-semibold">PowerPoint</span>
+        </a>
+
+        <a href="#excel" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+          <span class="text-xs font-semibold">Excel</span>
+        </a>
+
+        <a href="#foto" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l2-2h3l2-2h4l2 2h3l2 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span class="text-xs font-semibold">Foto</span>
+        </a>
+
+        <a href="#lainnya" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
+          <!-- Ikon "lainnya" tiga titik -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="6" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="18" cy="12" r="1.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-xs font-semibold">Lainnya</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Grid Produk per Kategori -->
+    <div class="space-y-16">
+
+      <!-- Template -->
+      <section id="template">
+        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Template</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <!-- Produk Template 1 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="Template 1.png" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Template Canva siap dipakai dengan konsep Petualangan Ilmu di Alam</h3>
-                <p class="text-sm mb-4 opacity-80">Template ceria bertema alam, cocok untuk presentasi sains atau tugas sekolah anak. Desain penuh warna dan mudah disesuaikan dalam bentuk PPT.</p>
-                <div class="flex items-center justify-between">
-                    <!-- Tombol Preview -->
-                    <button onclick="openPreview('Template 1.png')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">
-                        Preview
-                    </button>
-                    <!-- Tombol Dapatkan -->
-                    <a href="http://lynk.id/o2.company/q8onpv5rz1p0/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">
-                        Dapatkan
-                    </a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Template Canva siap dipakai dengan konsep Petualangan Ilmu di Alam</h3>
+              <p class="text-sm mb-4 opacity-80">Template ceria bertema alam, cocok untuk presentasi sains atau tugas sekolah anak. Desain penuh warna dan mudah disesuaikan dalam bentuk PPT.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('Template 1.png')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="http://lynk.id/o2.company/q8onpv5rz1p0/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</section>
+      </section>
 
-            <!-- Kategori Software -->
-	<section id="software">
-		<h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Software</h2>
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Software -->
+      <section id="software">
+        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Software</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-			<!-- Produk Card -->
-			<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-				<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-			<div>
-				<h3 class="text-xl font-bold mb-2">Legal Office LTSC Professional Plus 2024 - Volume License 64-bit</h3>
-				<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
-			</div>
-				<div class="mt-auto pt-2">
-				<a href="http://lynk.id/o2.company/v46351ze68ej/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-			</div>
-			</div>
-		</div>
+          <!-- Card 1 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office LTSC Professional Plus 2024 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/v46351ze68ej/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
-		<!-- Produk Card -->
-		<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-			<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Legal Office LTSC Standard 2024 - Volume License 64-bit</h3>
-					<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
-				</div>
-				<div class="mt-auto pt-2">
-					<a href="http://lynk.id/o2.company/erong85evmry/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-				</div>
-			</div>
-		</div>
+          <!-- Card 2 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office LTSC Standard 2024 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/erong85evmry/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
+          <!-- Card 3 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office LTSC Professional Plus 2021 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/59d68z1vd9o6/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
-        <!-- Produk Card -->
-		<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-			<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Legal Office LTSC Professional Plus 2021 - Volume License 64-bit</h3>
-					<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya..</p>
-				</div>
-				<div class="mt-auto pt-2">
-					<a href="http://lynk.id/o2.company/59d68z1vd9o6/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Produk Card -->
-		<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-			<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Legal Office LTSC Standard 2021 - Volume License 64-bit</h3>
-					<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
-				</div>
-				<div class="mt-auto pt-2">
-					<a href="http://lynk.id/o2.company/vdxw9159pro7/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Produk Card -->
-		<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-			<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Legal Office Professional Plus 2019 - Volume License 64-bit</h3>
-					<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
-				</div>
-				<div class="mt-auto pt-2">
-					<a href="http://lynk.id/o2.company/zpko18pnn9gn/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Produk Card -->
-		<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-			<img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Legal Office Standard 2019 - Volume License 64-bit</h3>
-					<p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
-				</div>
-				<div class="mt-auto pt-2">
-					<a href="http://lynk.id/o2.company/k0nrxyo7pggo/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-				</div>
-			</div>
-		</div>
+          <!-- Card 4 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office LTSC Standard 2021 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/vdxw9159pro7/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
-    </div>
-	</section>
+          <!-- Card 5 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office Professional Plus 2019 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/zpko18pnn9gn/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
+          <!-- Card 6 -->
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+            <img src="MS office.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+            <div class="product-card-content p-5 flex flex-col flex-1">
+              <div>
+                <h3 class="text-xl font-bold mb-2">Legal Office Standard 2019 - Volume License 64-bit</h3>
+                <p class="text-sm mb-4 opacity-80">Office versi lengkap tanpa langganan! Cocok untuk kantor & instansi, stabil, cepat, dan legal. Sekali beli, langsung pakai selamanya.</p>
+              </div>
+              <div class="mt-auto pt-2">
+                <a href="http://lynk.id/o2.company/k0nrxyo7pggo/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
+            </div>
+          </div>
 
-            <!-- Kategori E-Book -->
-<section id="ebook">
-    <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">E-Book</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+      </section>
 
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+      <!-- E-Book -->
+      <section id="ebook">
+        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">E-Book</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/DCD7CE/333333?text=E-Book+1" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Panduan Digital Marketing</h3>
-                <p class="text-sm mb-4 opacity-80">Pelajari strategi marketing online dari dasar hingga mahir.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+1')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Panduan Digital Marketing</h3>
+              <p class="text-sm mb-4 opacity-80">Pelajari strategi marketing online dari dasar hingga mahir.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+1')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/DCD7CE/333333?text=E-Book+2" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Resep Masakan Sehat</h3>
-                <p class="text-sm mb-4 opacity-80">Kumpulan resep lezat dan menyehatkan untuk keluarga.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+2')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Resep Masakan Sehat</h3>
+              <p class="text-sm mb-4 opacity-80">Kumpulan resep lezat dan menyehatkan untuk keluarga.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+2')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/DCD7CE/333333?text=E-Book+3" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Novel Fiksi Ilmiah</h3>
-                <p class="text-sm mb-4 opacity-80">Petualangan seru di galaksi yang jauh dan tak terjamah.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Novel Fiksi Ilmiah</h3>
+              <p class="text-sm mb-4 opacity-80">Petualangan seru di galaksi yang jauh dan tak terjamah.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
+          </div>
+
         </div>
+      </section>
 
-    </div>
-</section>
+      <!-- Musik & Audio -->
+      <section id="musik">
+        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Musik & Audio</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-<!-- Kategori Musik & Audio -->
-<section id="musik">
-    <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Musik & Audio</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+1" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Paket Musik Lofi</h3>
-                <p class="text-sm mb-4 opacity-80">Musik latar yang menenangkan untuk bekerja atau belajar.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+1')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Paket Musik Lofi</h3>
+              <p class="text-sm mb-4 opacity-80">Musik latar yang menenangkan untuk bekerja atau belajar.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+1')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+2" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Efek Suara Sinematik</h3>
-                <p class="text-sm mb-4 opacity-80">Koleksi efek suara dramatis untuk proyek video Anda.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+2')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Efek Suara Sinematik</h3>
+              <p class="text-sm mb-4 opacity-80">Koleksi efek suara dramatis untuk proyek video Anda.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+2')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+3" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Album Musik Indie</h3>
-                <p class="text-sm mb-4 opacity-80">Album terbaru dari musisi independen berbakat.</p>
-                <div class="flex items-center justify-between">
-                    <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                    <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Album Musik Indie</h3>
+              <p class="text-sm mb-4 opacity-80">Album terbaru dari musisi independen berbakat.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('https://placehold.co/600x400/ACA69A/FFFFFF?text=Musik+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
+          </div>
+
         </div>
+      </section>
 
-    </div>
-</section>
+      <!-- Lainnya -->
+      <section id="lainnya">
+        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Digital Produk Lainnya</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-<!-- Modal Preview -->
-<div id="previewModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <div class="relative max-w-4xl w-full">
-        <button onclick="closePreview()" class="absolute top-2 right-2 bg-white text-black rounded-full px-3 py-1 font-bold hover:bg-gray-200">X</button>
-        <img id="previewImage" src="" class="w-full h-auto rounded-lg shadow-lg">
-    </div>
-</div>
-
-<!-- Kategori Lainnya -->
-<section id="lainnya">
-    <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Didital Produk Lainnnya</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- Produk Card -->
-        <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
+          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
             <img src="digital1.jpg" alt="Gambar Produk" class="w-full h-56 object-cover">
             <div class="product-card-content p-5">
-                <h3 class="text-xl font-bold mb-2">Digital Product Mastery | Akselerasi Karir Digital</h3>
-                <p class="text-sm mb-4 opacity-80">40 + Module terhadap apa itu Digital Product Dari awal ampe abis semua dibahasHARGA PRESALE</p>
-                <div class="flex items-center justify-between">
-                   <a href="http://lynk.id/o2.company/y96g90V/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-                </div>
+              <h3 class="text-xl font-bold mb-2">Digital Product Mastery | Akselerasi Karir Digital</h3>
+              <p class="text-sm mb-4 opacity-80">40+ modul tentang Digital Product: materi dari awal sampai akhir dibahas. HARGA PRESALE.</p>
+              <div class="flex items-center justify-between">
+                <button onclick="openPreview('digital1.jpg')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+                <a href="http://lynk.id/o2.company/y96g90V/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+              </div>
             </div>
+          </div>
+
         </div>
-	</div>
-</Section>
-		
-<!-- Modal Preview -->
-<div id="previewModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <!-- Klik area luar untuk close -->
-    <div class="relative w-full flex justify-center" onclick="closePreview(event)">
-        <!-- Tombol Close -->
-        <button onclick="closePreview()" 
-                class="absolute top-4 right-4 bg-white text-black rounded-full px-3 py-1 font-bold hover:bg-gray-200 z-10">
-            X
-        </button>
-        <!-- Gambar Preview (50% ukuran) -->
-        <img id="previewImage" src="" 
-             class="max-w-[50%] h-auto rounded-lg shadow-lg" 
-             onclick="event.stopPropagation()">
+      </section>
+
     </div>
-</div>
+  </main>
 
-<script>
-function openPreview(imageSrc) {
-    document.getElementById('previewImage').src = imageSrc;
-    const modal = document.getElementById('previewModal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-}
-
-function closePreview(event) {
-    // Jika klik di luar gambar, tutup modal
-    if (!event || !event.target.closest('#previewImage')) {
-        const modal = document.getElementById('previewModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-}
-</script>
-
-
-        <!-- Bagian Hubungi Kami -->
-        <section id="kontak" class="mt-24 pt-12">
-            <div class="contact-form-container max-w-3xl mx-auto text-center p-8 rounded-xl shadow-lg">
-                <h2 class="text-3xl font-bold mb-4">Hubungi Kami</h2>
-                <p class="opacity-80 mb-8">Punya pertanyaan atau butuh bantuan? Isi formulir di bawah ini dan kami akan segera merespons.</p>
-                
-                <!-- Formulir Kontak Fungsional -->
-                <!-- Contact Form (Bright White Background) -->
-<div class="max-w-2xl mx-auto mt-12">
-  <div class="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 p-6 md:p-8">
-    <h3 class="text-2xl font-bold text-slate-900 mb-6">Kirim Pesan</h3>
-
-    <form id="contact-form" action="https://formspree.io/f/meozpozr" method="POST" class="text-left space-y-5" autocomplete="on" novalidate>
-      <!-- Honeypot (anti-spam) -->
-      <input type="text" name="_gotcha" class="hidden" tabindex="-1" aria-hidden="true" />
-
-      <!-- Optional: email subject -->
-      <input type="hidden" name="_subject" value="Pesan baru dari Portofolio Andhika" />
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div>
-          <label for="name" class="block mb-1 font-semibold text-slate-700">Nama</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder="Nama lengkap"
-            class="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-          />
-        </div>
-        <div>
-          <label for="address" class="block mb-1 font-semibold text-slate-700">Alamat</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Alamat (opsional)"
-            class="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-          />
-        </div>
+  <!-- Footer -->
+  <footer class="mt-16">
+    <div class="bg-transparent py-8">
+      <div class="container mx-auto px-6 text-center opacity-70">
+        <p>&copy; <span id="year"></span> DHX.O2. Semua Hak Cipta Dilindungi.</p>
       </div>
+    </div>
+  </footer>
 
-      <div>
-        <label for="email" class="block mb-1 font-semibold text-slate-700">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          placeholder="nama@contoh.com"
-          class="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-        />
-      </div>
-
-      <div>
-        <label for="message" class="block mb-1 font-semibold text-slate-700">Keluhan / Pesan</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          required
-          placeholder="Tulis pesanmu di sini…"
-          class="w-full p-3 rounded-lg bg-gray-50 border border-gray-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-        ></textarea>
-      </div>
-
-      <div class="text-center">
-        <button
-          type="submit"
-          class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-8 rounded-full transition-colors"
-        >
-          <i class="fa-solid fa-paper-plane text-white"></i>
-          Kirim Pesan
-        </button>
-      </div>
-
-      <!-- Status message -->
-      <div id="form-status" class="hidden mt-4 text-center text-sm"></div>
-    </form>
+  <!-- Modal Preview (global, 1x saja) -->
+  <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+    <div class="relative w-full flex justify-center px-4" id="previewBackdrop">
+      <button id="previewClose" class="absolute top-4 right-4 bg-white text-black rounded-full px-3 py-1 font-bold hover:bg-gray-200 z-10">X</button>
+      <img id="previewImage" src="" class="max-w-[50%] h-auto rounded-lg shadow-lg" alt="Preview">
+    </div>
   </div>
-</div>
 
-<!-- Script untuk notifikasi sukses/gagal -->
-<script>
-  (function () {
-    const form = document.getElementById('contact-form');
-    const statusEl = document.getElementById('form-status');
+  <script>
+    // ------------------ Tahun footer ------------------
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    function showStatus(message, isSuccess = true) {
-      statusEl.textContent = message;
-      statusEl.className =
-        'mt-4 text-center text-sm ' +
-        (isSuccess
-          ? 'text-emerald-700'
-          : 'text-rose-700');
-      statusEl.classList.remove('hidden');
-    }
+    // ------------------ Theme toggle ------------------
+    const toggleButtons = [
+      {
+        btn: document.getElementById('theme-toggle-desktop'),
+        darkIcon: document.getElementById('theme-toggle-dark-icon-desktop'),
+        lightIcon: document.getElementById('theme-toggle-light-icon-desktop'),
+      },
+      {
+        btn: document.getElementById('theme-toggle-mobile'),
+        darkIcon: document.getElementById('theme-toggle-dark-icon-mobile'),
+        lightIcon: document.getElementById('theme-toggle-light-icon-mobile'),
+      }
+    ];
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'application/json' }
+    function applyTheme(theme){
+      if(theme==='dark'){
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        toggleButtons.forEach(({darkIcon,lightIcon})=>{
+          if(darkIcon&&lightIcon){darkIcon.classList.add('hidden');lightIcon.classList.remove('hidden');}
         });
-
-        if (res.ok) {
-          form.reset();
-          showStatus('Terima kasih! Pesanmu sudah terkirim ✅', true);
-        } else {
-          const json = await res.json().catch(() => ({}));
-          const msg =
-            (json && json.errors && json.errors.map(e => e.message).join(', ')) ||
-            'Maaf, terjadi kesalahan. Coba lagi nanti.';
-          showStatus(msg, false);
-        }
-      } catch (err) {
-        showStatus('Gagal mengirim. Periksa koneksi internet kamu ya.', false);
+      }else{
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        toggleButtons.forEach(({darkIcon,lightIcon})=>{
+          if(darkIcon&&lightIcon){lightIcon.classList.add('hidden');darkIcon.classList.remove('hidden');}
+        });
+      }
+    }
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(currentTheme);
+    toggleButtons.forEach(({btn})=>{
+      if(btn){
+        btn.addEventListener('click',()=>{
+          const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+          localStorage.setItem('theme', newTheme);
+          applyTheme(newTheme);
+        });
       }
     });
-  })();
-</script>
 
-            </div>
-        </section>
-    </main>
+    // ------------------ Mobile menu toggle (seperti contohmu) ------------------
+    const mobileBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click',()=> mobileMenu.classList.toggle('hidden'));
+    mobileMenu.addEventListener('click',(e)=>{ if(e.target.tagName==='A'){ mobileMenu.classList.add('hidden'); } });
 
-    <!-- Bagian Footer -->
-    <footer class="mt-16">
-        <div class="bg-transparent py-8">
-            <div class="container mx-auto px-6 text-center opacity-70">
-                <p>&copy; 2024 DHX.O2. Semua Hak Cipta Dilindungi.</p>
-            </div>
-        </div>
-    </footer>
+    // ------------------ Preview Modal (50%) ------------------
+    const modal   = document.getElementById('previewModal');
+    const imgEl   = document.getElementById('previewImage');
+    const closeEl = document.getElementById('previewClose');
 
-    <script>
-        // Skrip untuk Pengalih Tema (Light/Dark Mode)
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-        // Fungsi untuk menerapkan tema
-        const applyTheme = (theme) => {
-            if (theme === 'dark') {
-                document.body.classList.remove('light-mode');
-                document.body.classList.add('dark-mode');
-                darkIcon.classList.add('hidden');
-                lightIcon.classList.remove('hidden');
-            } else {
-                document.body.classList.remove('dark-mode');
-                document.body.classList.add('light-mode');
-                lightIcon.classList.add('hidden');
-                darkIcon.classList.remove('hidden');
-            }
-        };
-
-        // Cek tema yang tersimpan di localStorage atau preferensi sistem
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        applyTheme(currentTheme);
-
-        // Event listener untuk tombol
-        themeToggleBtn.addEventListener('click', () => {
-            const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
-        });
-    </script>
-<script>
-  (function(){
-    const btn = document.getElementById('mobile-menu-btn');
-    const panel = document.getElementById('mobile-menu');
-    const drawer = panel.querySelector('nav');
-    const overlay = document.getElementById('mobile-overlay');
-    const closeBtn = document.getElementById('mobile-close');
-
-    function openMenu() {
-      panel.classList.remove('hidden');
-      // next frame for transition
-      requestAnimationFrame(()=> drawer.classList.remove('translate-x-full'));
-      document.body.style.overflow = 'hidden';
+    function openPreview(src){
+      if(!src) return;
+      imgEl.src = src;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.documentElement.classList.add('overflow-hidden');
     }
-    function closeMenu() {
-      drawer.classList.add('translate-x-full');
-      setTimeout(()=> panel.classList.add('hidden'), 250);
-      document.body.style.overflow = '';
+    function closePreview(){
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      imgEl.src = '';
+      document.documentElement.classList.remove('overflow-hidden');
     }
-
-    btn.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-
-    // Tutup saat klik link di drawer
-    drawer.addEventListener('click', (e)=>{
-      if (e.target.tagName === 'A') closeMenu();
+    // tombol X
+    closeEl.addEventListener('click', closePreview);
+    // klik luar gambar
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal || e.target === document.getElementById('previewBackdrop')) closePreview();
     });
+    // Esc
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !modal.classList.contains('hidden')) closePreview(); });
 
-    // ESC untuk tutup
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape' && !panel.classList.contains('hidden')) closeMenu();
+    // Delegasi klik: gambar card atau tombol/tautan "Preview"
+    document.addEventListener('click', function(e){
+      // klik gambar
+      const clickedImg = e.target.closest('.rounded-lg img');
+      if(clickedImg){
+        e.preventDefault();
+        openPreview(clickedImg.src);
+        return;
+      }
+      // klik tombol/link bertuliskan "Preview"
+      const btn = e.target.closest('a,button');
+      if(btn && /preview/i.test(btn.textContent||'')){
+        e.preventDefault();
+        const card = btn.closest('.rounded-lg');
+        const img = card ? card.querySelector('img') : null;
+        openPreview(img ? img.src : null);
+      }
     });
-  })();
-</script>
-
+  </script>
 </body>
 </html>
