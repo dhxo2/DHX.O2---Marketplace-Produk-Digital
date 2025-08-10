@@ -86,9 +86,57 @@
                     <!-- Ikon Matahari (untuk dark mode) -->
                     <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                 </button>
+				<!-- Menu Kanan -->
+<div class="items-center space-x-4 hidden md:flex">
+  <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
+  <!-- Tombol Pengalih Tema -->
+  <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+    <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+  </button>
+</div>
+
+<!-- Tombol Hamburger (HP) -->
+<button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+  <!-- Icon garis tiga -->
+  <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+  </svg>
+  <span class="sr-only">Buka menu</span>
+</button>
+
             </div>
         </div>
     </header>
+	
+<!-- Panel Menu Mobile -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+  <!-- Overlay -->
+  <div id="mobile-overlay" class="absolute inset-0 bg-black/50"></div>
+
+  <!-- Drawer -->
+  <nav class="absolute right-0 top-0 h-full w-72 max-w-[85%] bg-white dark:bg-[#1E1F24] shadow-xl p-5 flex flex-col gap-3 translate-x-full transition-transform duration-300 will-change-transform">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-lg font-bold">Menu</span>
+      <button id="mobile-close" class="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10" aria-label="Tutup menu">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Pilihan kategori -->
+    <a href="#template" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Template</a>
+    <a href="#software" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Software</a>
+    <a href="#ebook" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">E-Book</a>
+    <a href="#musik" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Musik & Audio</a>
+    <a href="#foto_video" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Foto & Video</a>
+    <a href="#lainnya" class="py-2 px-3 rounded-md hover:bg-black/5 dark:hover:bg-white/10">Lainnya</a>
+
+    <hr class="my-3 border-gray-200 dark:border-white/10">
+    <a href="#kontak" class="py-2 px-3 rounded-md bg-gray-900 text-white text-center font-semibold hover:bg-black dark:bg-white dark:text-black dark:hover:bg-gray-100">Hubungi Kami</a>
+  </nav>
+</div>
 
     <main class="container mx-auto px-6 py-12">
         <!-- Deskripsi Website -->
@@ -575,6 +623,41 @@ function closePreview(event) {
             applyTheme(newTheme);
         });
     </script>
+<script>
+  (function(){
+    const btn = document.getElementById('mobile-menu-btn');
+    const panel = document.getElementById('mobile-menu');
+    const drawer = panel.querySelector('nav');
+    const overlay = document.getElementById('mobile-overlay');
+    const closeBtn = document.getElementById('mobile-close');
+
+    function openMenu() {
+      panel.classList.remove('hidden');
+      // next frame for transition
+      requestAnimationFrame(()=> drawer.classList.remove('translate-x-full'));
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      drawer.classList.add('translate-x-full');
+      setTimeout(()=> panel.classList.add('hidden'), 250);
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Tutup saat klik link di drawer
+    drawer.addEventListener('click', (e)=>{
+      if (e.target.tagName === 'A') closeMenu();
+    });
+
+    // ESC untuk tutup
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) closeMenu();
+    });
+  })();
+</script>
 
 </body>
 </html>
