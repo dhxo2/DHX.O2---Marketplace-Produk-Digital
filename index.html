@@ -50,18 +50,36 @@
       <!-- Logo -->
       <a href="#beranda" class="text-2xl md:text-3xl font-bold">DHX.O2</a>
 
-      <!-- Menu kanan (Desktop) -->
-      <div class="items-center space-x-4 hidden md:flex">
-        <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
+      <!-- DESKTOP -->
+<button id="theme-toggle-desktop"
+        class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+  <!-- Moon (tampil saat LIGHT) -->
+  <svg id="icon-moon-desktop" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+  </svg>
+  <!-- Sun (tampil saat DARK) -->
+  <svg id="icon-sun-desktop" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <circle cx="12" cy="12" r="4" stroke-width="2"/>
+    <path stroke-width="2" stroke-linecap="round"
+          d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+  </svg>
+</button>
 
-        <!-- Tombol Pengalih Tema (Desktop) -->
-        <button id="theme-toggle" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-          <i id="theme-icon" data-lucide="moon" class="w-6 h-6"></i>
-        </button>
-        <button id="mobile-menu-button" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 md:hidden">
-          <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
-      </div>
+<!-- MOBILE -->
+<button id="theme-toggle-mobile"
+        class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+  <!-- Moon (tampil saat LIGHT) -->
+  <svg id="icon-moon-mobile" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+  </svg>
+  <!-- Sun (tampil saat DARK) -->
+  <svg id="icon-sun-mobile" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <circle cx="12" cy="12" r="4" stroke-width="2"/>
+    <path stroke-width="2" stroke-linecap="round"
+          d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+  </svg>
+</button>
+
 
       <!-- Tombol tema + Hamburger (Mobile) -->
       <div class="md:hidden flex items-center gap-3">
