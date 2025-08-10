@@ -7,6 +7,7 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: 'class' } </script>
 
   <!-- Google Fonts: BioRhyme -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +22,6 @@
     /* Light / Dark */
     body.light-mode{background:#FFFFFF;color:#1A1C22;}
     body.dark-mode{background-image:linear-gradient(to right,#1A1C22,#232526,#414345);color:#FAF9F6;}
-
     section[id]{scroll-margin-top:90px;}
 
     /* Kartu "gelembung" */
@@ -50,43 +50,41 @@
       <!-- Logo -->
       <a href="#beranda" class="text-2xl md:text-3xl font-bold">DHX.O2</a>
 
-      <!-- DESKTOP -->
-<button id="theme-toggle-desktop"
-        class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-  <!-- Moon (tampil saat LIGHT) -->
-  <svg id="icon-moon-desktop" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-  </svg>
-  <!-- Sun (tampil saat DARK) -->
-  <svg id="icon-sun-desktop" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <circle cx="12" cy="12" r="4" stroke-width="2"/>
-    <path stroke-width="2" stroke-linecap="round"
-          d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-  </svg>
-</button>
+      <!-- Menu kanan (Desktop) -->
+      <div class="items-center space-x-4 hidden md:flex">
+        <a href="#kontak" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-900 dark:bg-gray-200 dark:text-black dark:hover:bg-white font-semibold">Hubungi Kami</a>
 
-<!-- MOBILE -->
-<button id="theme-toggle-mobile"
-        class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-  <!-- Moon (tampil saat LIGHT) -->
-  <svg id="icon-moon-mobile" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-  </svg>
-  <!-- Sun (tampil saat DARK) -->
-  <svg id="icon-sun-mobile" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <circle cx="12" cy="12" r="4" stroke-width="2"/>
-    <path stroke-width="2" stroke-linecap="round"
-          d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-  </svg>
-</button>
-
+        <!-- Tombol Pengalih Tema (Desktop) -->
+        <button id="theme-toggle-desktop"
+                class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <!-- Moon (tampil saat LIGHT) -->
+          <svg id="icon-moon-desktop" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          </svg>
+          <!-- Sun (tampil saat DARK) -->
+          <svg id="icon-sun-desktop" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="2"/>
+            <path stroke-width="2" stroke-linecap="round"
+                  d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
 
       <!-- Tombol tema + Hamburger (Mobile) -->
       <div class="md:hidden flex items-center gap-3">
         <!-- Tema (Mobile) -->
-        <button id="theme-toggle-mobile" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          <svg id="theme-toggle-dark-icon-mobile" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
-          <svg id="theme-toggle-light-icon-mobile" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1z"/></svg>
+        <button id="theme-toggle-mobile"
+                class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <!-- Moon (tampil saat LIGHT) -->
+          <svg id="icon-moon-mobile" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          </svg>
+          <!-- Sun (tampil saat DARK) -->
+          <svg id="icon-sun-mobile" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke-width="2"/>
+            <path stroke-width="2" stroke-linecap="round"
+                  d="M12 2v2M12 20v2M4 12H2M22 12h-2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
         </button>
         <!-- Hamburger -->
         <button id="mobile-menu-button" class="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 dark:border-white/20 dark:hover:bg-white/10">
@@ -98,15 +96,15 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu (drop-down sederhana seperti contohmu) -->
+    <!-- Mobile Menu (drop-down) -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-      <a href="#template" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Template</a>
-      <a href="#software" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Software</a>
-      <a href="#ebook" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">E-Book</a>
-      <a href="#musik" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Musik & Audio</a>
-      <a href="#foto_video" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Foto & Video</a>
-      <a href="#lainnya" class="block py-2 text-slate-700 dark:text-gray-200 hover:text-cyan-600">Lainnya</a>
-      <a href="#kontak" class="block py-2 bg-cyan-500 text-white text-center font-bold rounded-lg">Hubungi Kami</a>
+      <a href="#template"   class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">Template</a>
+      <a href="#software"   class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">Software</a>
+      <a href="#ebook"      class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">E-Book</a>
+      <a href="#musik"      class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">Musik & Audio</a>
+      <a href="#foto_video" class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">Foto & Video</a>
+      <a href="#lainnya"    class="block py-2 text-gray-900 dark:text-white hover:text-cyan-600">Lainnya</a>
+      <a href="#kontak"     class="block py-2 text-center font-bold rounded-lg bg-cyan-500 text-white">Hubungi Kami</a>
     </div>
   </header>
 
@@ -209,7 +207,7 @@
 
         <a href="#powerpoint" class="category-item flex flex-col items-center p-3 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-4m-2 4h.01M12 14h.01M10 10h.01M14 10h.01M16 14h.01M12 6V4m0 2a2 2 0 100 4h-4a2 2 0 100 4h4a2 2 0 100-4z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-4m-2 4h.01M12 14h.01M10 10h.01M14 10h.01M16 14h.01M12 6V4m0 2a2 2 0 100 4h-4a2 2 0 100 4z"/>
           </svg>
           <span class="text-xs font-semibold">PowerPoint</span>
         </a>
@@ -487,52 +485,66 @@
     // ------------------ Tahun footer ------------------
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ------------------ Theme toggle ------------------
-    const toggleButtons = [
+    // ------------------ Theme toggle (sinkron desktop & mobile + ikon) ------------------
+    const htmlEl = document.documentElement;
+
+    const toggles = [
       {
-        btn: document.getElementById('theme-toggle-desktop'),
-        darkIcon: document.getElementById('theme-toggle-dark-icon-desktop'),
-        lightIcon: document.getElementById('theme-toggle-light-icon-desktop'),
+        btn:  document.getElementById('theme-toggle-desktop'),
+        moon: document.getElementById('icon-moon-desktop'),
+        sun:  document.getElementById('icon-sun-desktop'),
       },
       {
-        btn: document.getElementById('theme-toggle-mobile'),
-        darkIcon: document.getElementById('theme-toggle-dark-icon-mobile'),
-        lightIcon: document.getElementById('theme-toggle-light-icon-mobile'),
+        btn:  document.getElementById('theme-toggle-mobile'),
+        moon: document.getElementById('icon-moon-mobile'),
+        sun:  document.getElementById('icon-sun-mobile'),
       }
     ];
 
+    function isDark(){ return htmlEl.classList.contains('dark'); }
+
     function applyTheme(theme){
       if(theme==='dark'){
+        htmlEl.classList.add('dark');
         document.body.classList.remove('light-mode');
         document.body.classList.add('dark-mode');
-        toggleButtons.forEach(({darkIcon,lightIcon})=>{
-          if(darkIcon&&lightIcon){darkIcon.classList.add('hidden');lightIcon.classList.remove('hidden');}
-        });
       }else{
+        htmlEl.classList.remove('dark');
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
-        toggleButtons.forEach(({darkIcon,lightIcon})=>{
-          if(darkIcon&&lightIcon){lightIcon.classList.add('hidden');darkIcon.classList.remove('hidden');}
-        });
       }
+      syncIcons();
     }
-    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    applyTheme(currentTheme);
-    toggleButtons.forEach(({btn})=>{
-      if(btn){
-        btn.addEventListener('click',()=>{
-          const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
-          localStorage.setItem('theme', newTheme);
-          applyTheme(newTheme);
-        });
-      }
+
+    function syncIcons(){
+      const dark = isDark();
+      toggles.forEach(({moon,sun})=>{
+        if(!moon||!sun) return;
+        sun.classList.toggle('hidden', !dark); // sun muncul saat DARK
+        moon.classList.toggle('hidden', dark); // moon muncul saat LIGHT
+      });
+    }
+
+    const saved = localStorage.getItem('theme');
+    const initial = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
+    applyTheme(initial);
+
+    toggles.forEach(({btn})=>{
+      if(!btn) return;
+      btn.addEventListener('click', ()=>{
+        const next = isDark() ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+      });
     });
 
-    // ------------------ Mobile menu toggle (seperti contohmu) ------------------
-    const mobileBtn = document.getElementById('mobile-menu-button');
+    // ------------------ Mobile menu toggle ------------------
+    const mobileBtn  = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    mobileBtn.addEventListener('click',()=> mobileMenu.classList.toggle('hidden'));
-    mobileMenu.addEventListener('click',(e)=>{ if(e.target.tagName==='A'){ mobileMenu.classList.add('hidden'); } });
+    if (mobileBtn && mobileMenu){
+      mobileBtn.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+      mobileMenu.addEventListener('click', (e)=>{ if(e.target.tagName==='A') mobileMenu.classList.add('hidden'); });
+    }
 
     // ------------------ Preview Modal (50%) ------------------
     const modal   = document.getElementById('previewModal');
@@ -563,14 +575,12 @@
 
     // Delegasi klik: gambar card atau tombol/tautan "Preview"
     document.addEventListener('click', function(e){
-      // klik gambar
       const clickedImg = e.target.closest('.rounded-lg img');
       if(clickedImg){
         e.preventDefault();
         openPreview(clickedImg.src);
         return;
       }
-      // klik tombol/link bertuliskan "Preview"
       const btn = e.target.closest('a,button');
       if(btn && /preview/i.test(btn.textContent||'')){
         e.preventDefault();
