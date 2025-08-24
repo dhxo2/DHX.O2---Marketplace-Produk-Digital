@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
@@ -40,6 +40,16 @@
 
     .dark-mode .header-bg{background-color:rgba(26,28,34,0.7);}
     .light-mode .header-bg{background-color:rgba(255,255,255,0.7);}
+  </style>
+
+  <!-- Tambahan: clamp 3 baris tanpa mengubah elemen HTML asli -->
+  <style>
+    .desc-clamp{
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
   </style>
 </head>
 <body class="light-mode antialiased">
@@ -354,39 +364,50 @@
         </div>
       </section>
 	  
-	  <!-- Lainnya -->
-      <section id="poster">
-        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Poster</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+	  <!-- Poster -->
+<section id="poster">
+  <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Poster</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-		 <!-- Poster 1 -->
-          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
-            <img src="Dirgahayu.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-            <div class="product-card-content p-5">
-              <h3 class="text-xl font-bold mb-2">Poster HUT RI ke-80 – Desain Modern & Patriotik</h3>
-              <p class="text-sm mb-4 opacity-80">Rayakan semangat kemerdekaan dengan poster digital HUT RI ke-80 bertema "Bersatu, Berdaulat, Rakyat Sejahtera, Indonesia Maju" dalam bentuk PNG dan, PPTX!</p>
-              <div class="flex items-center justify-between">
-                <button onclick="openPreview('digital1.jpg')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                <a href="http://lynk.id/o2.company/xk5p1klpl6ey/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-              </div>
-            </div>
-          </div>
-
-		<!-- Poster 2 -->
-          <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200">
-            <img src="lombaku.png" alt="Gambar Produk" class="w-full h-56 object-cover">
-            <div class="product-card-content p-5">
-              <h3 class="text-xl font-bold mb-2">Semarak HUT RI ke-80</h3>
-              <p class="text-sm mb-4 opacity-80">Desain penuh semangat kemerdekaan dengan nuansa merah putih. Cocok untuk poster, undangan lomba, atau ucapan HUT RI ke-80. Mudah diedit dan siap pakai dalam bentuk PDF, PPTX!</p>
-              <div class="flex items-center justify-between">
-                <button onclick="openPreview('digital1.jpg')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
-                <a href="http://lynk.id/o2.company/l31ql5gy5xmg/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
-              </div>
-            </div>
-          </div>
- 
+    <!-- Poster 1 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="Dirgahayu.png" alt="Poster HUT RI ke-80 - Desain Modern & Patriotik" class="w-full h-56 object-cover" loading="lazy">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Poster HUT RI ke-80 – Desain Modern & Patriotik</h3>
+          <p class="text-sm mb-4 opacity-80">
+            Rayakan semangat kemerdekaan dengan poster digital HUT RI ke-80 bertema
+            “Bersatu, Berdaulat, Rakyat Sejahtera, Indonesia Maju” dalam format PNG dan PPTX!
+          </p>
         </div>
-      </section>
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <button onclick="openPreview('Dirgahayu.png')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+          <a href="http://lynk.id/o2.company/xk5p1klpl6ey/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poster 2 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="lombaku.png" alt="Poster Semarak HUT RI ke-80" class="w-full h-56 object-cover" loading="lazy">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Semarak HUT RI ke-80</h3>
+          <p class="text-sm mb-4 opacity-80">
+            Desain bernuansa merah putih yang cocok untuk poster, undangan lomba, atau ucapan HUT RI ke-80.
+            Mudah diedit dan siap pakai dalam format PDF dan PPTX!
+          </p>
+        </div>
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <button onclick="openPreview('lombaku.png')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+          <a href="http://lynk.id/o2.company/l31ql5gy5xmg/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
       <!-- E-Book -->
 <section id="ebook">
@@ -443,72 +464,135 @@
       </div>
     </div>
 	
+	<!-- Kartu 4 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="all.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Organic Brand Blueprint (Paket Bundling 10 Video)</h3>
+          <p class="text-sm mb-4 opacity-80 whitespace-pre-line leading-relaxed">
+			ORGANIC BRAND BLUEPRINT
 
+			STEP BY STEP Bangun Customer Royal
+			Tanpa Obral, Tanpa Iklan. Anda Jualan Apapun, Mereka Beli Berapapun.
+
+			Kamu akan dapat Materi : 
+
+			Bagaimana Bang Dery bisa bangun MEDIA COMPANY, Hingga Termonetized, BERVALUASI TINGGI, dan INVESTABLE (punya mega audiens yang siap BORONG produk Anda)
+			Succes Story bongkar-bongkaran keberhasilan beliau CUAN 700 JUTA DALAM 30 HARI, dari affiliate (Creators Economy Secrets)
+			Anda akan dikenalkan PENTINGNYA membangun BRAND KOMUNAL untuk menciptakan dan membangun LOYALITAS di era kolaborasi.
+			Teknik Bangun TIM dan SOP buat mereka (Gak pusing ngurus teknis)
+			Anda Tinggal CONTEK KEY FORMULAnya Bang Dery. 
+
+
+
+			Cocok untuk kamu:
+
+			1. Pebisnis yang pengen kuatin sumber traffic Organic biar ga ketergantungan iklan
+
+			2. Content  Creator yang pengen punya personal brand yang kuat sehingga bisa cuan tanpa nunggu endorse
+
+			3. Internet Marketers yang capek cari winning product terus-terusan dan bingung kelola customer (RO dan CRM)
+
+			4. Brand owners yang ingin bangun tim konten yang bisa kasih direct impact ke Omzet. (Tim kreatif tapi menghasilkan)
+
+
+
+			Siapapun yang ingin REVENUE STREAM BARU dari affiliate dan media tanpa harus punya produk akan makin ngetren di tahun depan. Bukan musiman. Cuan puluhan juta perbulan!
+			</p>
+
+        </div>
+        <!-- Baris tombol selalu di bawah -->
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+          <a href="http://lynk.id/o2.company/eB4zDzV/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+        </div>
+      </div>
+    </div>
+
+<!-- Kartu 5 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="koks.png" alt="Gambar Produk" class="w-full h-56 object-cover">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Ebook MindfulConnect</h3>
+			<p class="text-sm mb-4 opacity-80 whitespace-pre-line leading-relaxed">
+				Bagi teman-teman Mahasiswa, UKM, Karyawan dll, yang mau belajar Brand melalui AUDIOBOOK yang bisa diputar berkali-kali sampai paham. 
+
+				Terdapat 75 Topik mulai dari MARKETING 1.0 - MARKETING 4.0 langsung dibacain sama Pak Bi. Disamping belajar BRAND POSITIONING bisa buat obat kangen bagi Anda yang ingin dengar suara Pak Bi.
+				</p>
+
+		</div>
+        <!-- Baris tombol selalu di bawah -->
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <button onclick="openPreview('https://placehold.co/600x400/DCD7CE/333333?text=E-Book+3')" class="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm">Preview</button>
+          <a href="http://lynk.id/o2.company/Qa0nBWz/checkout" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">Dapatkan</a>
+        </div>
+      </div>
+    </div>
+	
   </div>
 </section>
 
 
 
       <!-- Musik & Audio -->
-      <section id="musik">
-        <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Musik & Audio</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-		  
-		  <!-- Produk Musik 1 -->
-				<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-					<img src="https://placehold.co/600x400/ACA69A/FFFFFF?text=Whispering+Strings" alt="Cover Whispering Strings" class="w-full h-56 object-cover">
-				<div class="product-card-content p-5 flex flex-col flex-1">
-				<div>
-					<h3 class="text-xl font-bold mb-2">Whispering Strings</h3>
-					<p class="text-sm mb-4 opacity-80">Cuplikan instrumen lembut untuk fokus & relaksasi.</p>
-				</div>
-				<div class="mt-auto pt-2 flex items-center justify-between">
-				<button
-					class="preview-audio inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm"
-					data-audio-src="Whispering%20Strings.mp3"
-					data-title="Whispering Strings">
-					Preview
-				</button>
-		<!-- Opsional: tetap bisa diarahkan ke halaman produk, bukan file mp3 -->
-			<a href="https://lynk.id/o2.company" target="_blank" rel="noopener noreferrer"
-			class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">
-			Dapatkan
-			</a>
-				</div>
-				</div>
-				</div>
-
-
-          <!-- Produk Musik 2 -->
-			<div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
-				<img src="Evening.png" alt="Whispers of the Evening" class="w-full h-56 object-cover">
-			<div class="product-card-content p-5 flex flex-col flex-1">
-			<div>
-				<h3 class="text-xl font-bold mb-2">Whispers of the Evening</h3>
-				<p class="text-sm mb-4 opacity-80">Dengarkan cuplikan lagu Whispers of the Evening.</p>
-			</div>
-		  <!-- Baris tombol selalu di bawah -->
-		  <div class="mt-auto pt-2 flex items-center justify-between">
-		  <!-- Preview Audio: pakai file Whispering Strings.mp3 -->
-			<button
-				class="preview-audio inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm"
-				data-audio-src="Whispers%20of%20the%20Evening.mp3"
-				data-title="Whispers of the Evening"
-			>
-			Preview
-			</button>
-			<a href="http://lynk.id/o2.company/n1r93l1d6kej/checkout" target="_blank" rel="noopener noreferrer"
-			class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">
-			Dapatkan
-			</a>
-			</div>
-			</div>
-			</div>
-
-          
-
+<section id="musik">
+  <h2 class="text-3xl font-bold mb-6 border-b-2 dark:border-gray-600 border-gray-300 pb-2">Musik & Audio</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Produk Musik 1 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="Strings.png" alt="Cover lagu Whispering Strings" class="w-full h-56 object-cover" loading="lazy">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Whispering Strings</h3>
+          <p class="text-sm mb-4 opacity-80">Cuplikan instrumen lembut untuk fokus dan relaksasi.</p>
         </div>
-      </section>
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <button
+            class="preview-audio inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm"
+            data-audio-src="Whispering%20Strings.mp3"
+            data-title="Whispering Strings">
+            Preview
+          </button>
+          <!-- Opsional: tetap bisa diarahkan ke halaman produk -->
+          <a href="http://lynk.id/o2.company/wgj60vkqovoq/checkout" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">
+            Dapatkan
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produk Musik 2 -->
+    <div class="rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 border dark:border-gray-700 border-gray-200 flex flex-col">
+      <img src="Evening.png" alt="Cover lagu Whispers of the Evening" class="w-full h-56 object-cover" loading="lazy">
+      <div class="product-card-content p-5 flex flex-col flex-1">
+        <div>
+          <h3 class="text-xl font-bold mb-2">Whispers of the Evening</h3>
+          <p class="text-sm mb-4 opacity-80">Dengarkan cuplikan lagu Whispers of the Evening.</p>
+        </div>
+        <!-- Baris tombol selalu di bawah -->
+        <div class="mt-auto pt-2 flex items-center justify-between">
+          <!-- Preview Audio -->
+          <button
+            class="preview-audio inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-5 rounded-full text-sm"
+            data-audio-src="Whispers%20of%20the%20Evening.mp3"
+            data-title="Whispers of the Evening">
+            Preview
+          </button>
+          <a href="http://lynk.id/o2.company/n1r93l1d6kej/checkout" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-5 rounded-full text-sm">
+            Dapatkan
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
       <!-- Lainnya -->
       <section id="lainnya">
@@ -866,6 +950,70 @@
       if(!modal.classList.contains('hidden')) closeAudioPreview();
     }
   });
+</script>
+
+<!-- Tambahan: Auto-generate tombol "Lebih Banyak" dan pastikan hanya satu deskripsi terbuka -->
+<script>
+  (function(){
+    // Pilih semua paragraf deskripsi di dalam kartu produk
+    const descs = Array.from(document.querySelectorAll('.product-card-content p.text-sm'));
+    // Tambahkan clamp awal + tombol dinamis
+    descs.forEach((p, idx) => {
+      // Abaikan kalau paragraf kosong
+      if(!p.textContent.trim()) return;
+
+      // Tandai dan clamp
+      p.dataset.descId = 'desc-' + idx;
+      p.classList.add('desc-clamp');
+
+      // Buat tombol toggle
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'toggle-desc text-sky-600 text-sm font-semibold focus:outline-none';
+      btn.textContent = 'Lebih Banyak';
+      btn.setAttribute('data-target', p.dataset.descId);
+
+      // Sisipkan setelah paragraf
+      p.insertAdjacentElement('afterend', btn);
+
+      // Sembunyikan tombol jika tidak overflow
+      requestAnimationFrame(() => {
+        if (p.scrollHeight <= p.clientHeight + 1) {
+          btn.classList.add('hidden');
+        }
+      });
+    });
+
+    // Event delegation untuk toggle
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.toggle-desc');
+      if (!btn) return;
+
+      const id = btn.getAttribute('data-target');
+      const target = descs.find(d => d.dataset.descId === id);
+      if (!target) return;
+
+      // Tutup semua deskripsi lain
+      descs.forEach(d => {
+        if (d !== target) d.classList.add('desc-clamp');
+      });
+      document.querySelectorAll('.toggle-desc').forEach(b => {
+        if (b !== btn) b.textContent = 'Lebih Banyak';
+      });
+
+      // Toggle target
+      const willOpen = target.classList.contains('desc-clamp');
+      if (willOpen) {
+        target.classList.remove('desc-clamp');
+        btn.textContent = 'Lebih Sedikit';
+        // Scroll agar deskripsi terlihat
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        target.classList.add('desc-clamp');
+        btn.textContent = 'Lebih Banyak';
+      }
+    });
+  })();
 </script>
 
 </body>
